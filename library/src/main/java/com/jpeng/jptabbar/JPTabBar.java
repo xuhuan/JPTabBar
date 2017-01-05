@@ -95,6 +95,11 @@ public class JPTabBar extends LinearLayout implements ViewPager.OnPageChangeList
     private int[] mSelectedIcons;
 
     /**
+     * 图标尺寸
+     */
+    private int iconSize = -1;
+
+    /**
      * 动画的实现类
      */
     private Animatable mAnimater;
@@ -244,7 +249,9 @@ public class JPTabBar extends LinearLayout implements ViewPager.OnPageChangeList
         int selectColor = mAttribute.getColor(R.styleable.JPTabBar_TabSelectColor, DEFAULT_SELECT_COLOR);
         int textSize = DensityUtils.px2sp(mContext, mAttribute.getDimensionPixelSize(R.styleable.JPTabBar_TabTextSize, DensityUtils.sp2px(mContext, DEFAULT_TEXTSIZE)));
         //这里
-        int iconSize = mAttribute.getDimensionPixelSize(R.styleable.JPTabBar_TabIconSize, DensityUtils.dp2px(mContext, DEFAULT_ICONSIZE));
+        if (iconSize == -1) {
+            iconSize = mAttribute.getDimensionPixelSize(R.styleable.JPTabBar_TabIconSize, DensityUtils.dp2px(mContext, DEFAULT_ICONSIZE));
+        }
         int margin = mAttribute.getDimensionPixelOffset(R.styleable.JPTabBar_TabMargin, DensityUtils.dp2px(mContext, DEFAULT_MARGIN));
         int AnimateType = mAttribute.getInt(R.styleable.JPTabBar_TabAnimate, DEFAULT_ANIMATE_TYPE);
         int BadgeColor = mAttribute.getColor(R.styleable.JPTabBar_BadgeColor, DEFAULT_BADGE_COLOR);
@@ -563,6 +570,14 @@ public class JPTabBar extends LinearLayout implements ViewPager.OnPageChangeList
      */
     public JPTabBar setSelectedIcons(int... selectedIcons) {
         this.mSelectedIcons = selectedIcons;
+        return this;
+    }
+
+    /**
+     * 设置图标尺寸
+     */
+    public JPTabBar setIconSize(int iconSize) {
+        this.iconSize = iconSize;
         return this;
     }
 
